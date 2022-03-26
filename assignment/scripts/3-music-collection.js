@@ -5,11 +5,11 @@ let collection = [];
 function addToCollection(title, artist, yearPublished){
   // code to be executed
   let album = {};
-  album.title = title;
-  album.artist = artist;
-  album.yearPublished = yearPublished;
-  collection.push(album);
-  return album;
+    album.title = title;
+    album.artist = artist;
+    album.yearPublished = yearPublished;
+      collection.push(album);
+        return album;
 }
 
 addToCollection('()', 'Sigur Ros', 2002);
@@ -51,12 +51,34 @@ function findByArtist(artist){
 } // end function
 
 console.log(findByArtist('Pixies')); 
-console.log(findByArtist('Smashing Pumpkins'));
-console.log('findByArtist("Mogwai")', findByArtist("Mogwai"));
+console.log('expect "siamese dream" and "gish"', findByArtist('Smashing Pumpkins'));
+console.log('expect "come on die young"',findByArtist("Mogwai"));
 
 foundArray = findByArtist('Van Halen');
 
 // function to search
-function search(artist, year){
+// INPUT artist and year
+// OUTPUT new array containing all search criteria of all the items in the COLLECTION
+// if there is no artist or yearPublished in search, return entire collection
 
-}
+function search(artist, yearPublished){
+  let newSearchArray =[];
+  if(artist === undefined && yearPublished === undefined){return collection} 
+  for(let album of collection){
+    if( artist === album.artist || yearPublished === album.yearPublished){
+      newSearchArray.push(album);
+    } 
+  }  // end for loop
+  return newSearchArray
+} // end function
+
+console.log('Searched Smashing Pumpkins, expect "siamese dream" and "gish"', search('Smashing Pumpkins'));
+console.log('Searched collection and 1991, expect "trompe le monde" and "gish"', search(collection, 1991));
+
+console.log('Searched collection and 1993, expect "last splash" and "siamese dream"', search(collection, 1993));
+console.log('Searched collection and 2002, expect "()"', search(collection, 2002));
+console.log('Ran function with 0 parameters, expect full COLLECTION', search());
+console.log('Searched daugschidt and 1993, expect IDK', search('daugschidt', 1993 ));
+
+
+// console.log(search('Sigur Ros', 2002));
